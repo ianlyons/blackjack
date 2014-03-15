@@ -11,10 +11,11 @@ class window.AppView extends Backbone.View
     "click .stand-button": -> @model.get('playerHand').stand()
 
   initialize: ->
-    @on 'change:winner', (->
-      alert @model.get 'winner' + " won!"
+    @model.on 'change:winner', (=>
+      alert @model.get('winner') + " won!"
     )
     @render()
+    @model.get('playerHand').checkBj()
 
   render: ->
     @$el.children().detach()

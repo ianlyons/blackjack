@@ -4,7 +4,9 @@ class window.Hand extends Backbone.Collection
 
   initialize: (array, @deck, @isDealer) ->
 
-  hit: -> @add(@deck.pop()).last()
+  hit: ->
+    @add(@deck.pop()).last()
+    if @scores()[0] > 21 then @trigger 'gameover', @
 
   scores: ->
     # The scores are an array of potential scores.
@@ -22,6 +24,9 @@ class window.Hand extends Backbone.Collection
     # send trigger to app that player's turn is over
     @trigger 'stand', @
 
+  checkBj: ->
+    if @scores()[1] == 21 then @trigger 'gameover', @
+
   autoplay: ->
     #auto play is called from App's handler after stand event from player
 
@@ -36,9 +41,8 @@ class window.Hand extends Backbone.Collection
       while @scores()[0] < 17
         @hit()
 
-
+    console.log('at the end of autoplay')
     # trigger to app that hand is over and score should be calculated
-    debugger
     @trigger 'gameover', @
 
 
