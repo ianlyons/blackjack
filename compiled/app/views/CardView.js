@@ -12,7 +12,7 @@
 
     CardView.prototype.className = 'card';
 
-    CardView.prototype.template = _.template('<%= rankName %> of <%= suitName %>');
+    CardView.prototype.template = _.template('<span><%= rankName %> of <%= suitName %></span>');
 
     CardView.prototype.initialize = function() {
       this.model.on('change', (function(_this) {

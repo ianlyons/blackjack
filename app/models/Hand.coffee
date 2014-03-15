@@ -6,7 +6,7 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop()).last()
-    if @scores()[0] > 21 then @trigger 'gameover', @
+    if @scores()[0] > 21 and !@isDealer then @trigger 'gameover', @
 
   scores: ->
     # The scores are an array of potential scores.

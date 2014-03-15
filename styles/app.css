@@ -1,16 +1,67 @@
+body {
+  background-image: url(http://www.cardsharkzllc.com/wp-content/uploads/2013/01/background1.jpg);
+  font-family: Arial, sans-serif;
+}
+
 .card {
   float: left;
-  border: solid 1px black;
-  width: 100px;
+  border: solid 1px #222;
+  background-color: #f0f0f0;
+  width: 84px;
   border-radius: 5px;
-  height: 140px;
+  height: 124px;
   margin-right: 20px;
+  padding: 8px;
+  box-shadow: 1px 2px 3px #222;
+}
+
+h2 {
+  color: #f0f0f0;
+}
+
+.messages {
+  border: solid #222 1px;
+  background-color: rgb(190,190,190);
+  background-color: rgba(190,190,190,0.6);
+  float: right;
+  height: 326px;
+  width: 200;
+  margin-top: 70px;
+  border-radius: 3px;
+  padding: 12px 8px;
 }
 
 .covered {
-  background-color: black;
+  background-image: url(http://watermarked.cutcaster.com/cutcaster-vector-800994091-playing-card-back-side-60x90-mm.jpg);
+  background-size: 100px 140px;
+}
+
+.covered span {
+  display: none;
 }
 
 .hand {
   overflow: auto;
+}
+
+.game {
+  width: 840px;
+  margin: 0 auto;
+}
+
+
+button {
+  font-size: 16px;
+  padding: 4px 6px;
+  background-color: white;
+  border-radius: 3px;
+  border: solid #222 1px;
+}
+
+button:hover {
+  box-shadow: inset -1px -1px 2px #222;
+}
+
+.button-contain {
+  margin-top: 16px;
 }

@@ -2,7 +2,7 @@
 (function() {
   new AppView({
     model: new App()
-  }).$el.appendTo('body');
+  }).$el.appendTo('body').addClass('game');
 
 }).call(this);
 

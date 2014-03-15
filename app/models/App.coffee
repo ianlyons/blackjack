@@ -20,18 +20,19 @@ class window.App extends Backbone.Model
 
     #set winner attribute
     @set 'winner', (if playerScore > 21
-      'dealer'
+      'Player Bust! Dealer Won.'
     else if dealerScore > 21
-      'player'
+      'Dealer Bust! Player Won.'
     else if playerScore > dealerScore and playerScore <= 21
-      'player'
+      'Player Won!'
     else if playerScore == dealerScore
-      'push'
+      'Push!'
     else
-      'dealer')
+      'Dealer Won!')
+    console.log 'results triggered'
     @trigger 'results', @
-    console.log 'the winner is: ' + @get 'winner'
-    @newgame()
+    # console.log 'the winner is: ' + @get 'winner'
+    # @newgame()
 
   newgame: ->
     # new collections
@@ -45,11 +46,12 @@ class window.App extends Backbone.Model
       @get('dealerHand').autoplay()
     )
     @listenTo @get('dealerHand'), 'gameover', (=>
-      console.log 'gameover caught by handler'
+      console.log 'dealer gameover caught by handler'
       @endgame())
     @listenTo @get('playerHand'), 'gameover', (=>
+      console.log 'player gameover caught by handler'
       @endgame())
 
     #trigger newgame to appView
-    console.log 'newgame called'
+    console.log '\nnewgame called'
     @trigger 'newgame',@

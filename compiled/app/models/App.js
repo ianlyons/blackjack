@@ -27,10 +27,9 @@
       playerScore = getBestScore(this.get('playerHand').scores());
       dealerScore = getBestScore(this.get('dealerHand').scores());
       console.log("scores: " + playerScore + ", " + dealerScore);
-      this.set('winner', (playerScore > 21 ? 'dealer' : dealerScore > 21 ? 'player' : playerScore > dealerScore && playerScore <= 21 ? 'player' : playerScore === dealerScore ? 'push' : 'dealer'));
-      this.trigger('results', this);
-      console.log('the winner is: ' + this.get('winner'));
-      return this.newgame();
+      this.set('winner', (playerScore > 21 ? 'Player Bust! Dealer Won.' : dealerScore > 21 ? 'Dealer Bust! Player Won.' : playerScore > dealerScore && playerScore <= 21 ? 'Player Won!' : playerScore === dealerScore ? 'Push!' : 'Dealer Won!'));
+      console.log('results triggered');
+      return this.trigger('results', this);
     };
 
     App.prototype.newgame = function() {
@@ -46,16 +45,17 @@
       })(this)));
       this.listenTo(this.get('dealerHand'), 'gameover', ((function(_this) {
         return function() {
-          console.log('gameover caught by handler');
+          console.log('dealer gameover caught by handler');
           return _this.endgame();
         };
       })(this)));
       this.listenTo(this.get('playerHand'), 'gameover', ((function(_this) {
         return function() {
+          console.log('player gameover caught by handler');
           return _this.endgame();
         };
       })(this)));
-      console.log('newgame called');
+      console.log('\nnewgame called');
       return this.trigger('newgame', this);
     };
 

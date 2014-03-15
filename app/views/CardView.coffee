@@ -2,7 +2,7 @@ class window.CardView extends Backbone.View
 
   className: 'card'
 
-  template: _.template '<%= rankName %> of <%= suitName %>'
+  template: _.template '<span><%= rankName %> of <%= suitName %></span>'
 
   initialize: ->
     @model.on 'change', => @render
