@@ -14,17 +14,17 @@
       return this.set({
         revealed: true,
         value: !params.rank || 10 < params.rank ? 10 : params.rank,
-        suitName: ['Spades', 'Diamonds', 'Clubs', 'Hearts'][params.suit],
+        suitName: ['spades', 'diams', 'clubs', 'hearts'][params.suit],
         rankName: (function() {
           switch (params.rank) {
             case 0:
-              return 'King';
+              return 'k';
             case 1:
-              return 'Ace';
+              return 'a';
             case 11:
-              return 'Jack';
+              return 'j';
             case 12:
-              return 'Queen';
+              return 'q';
             default:
               return params.rank;
           }

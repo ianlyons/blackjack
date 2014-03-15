@@ -1,10 +1,10 @@
 class window.CardView extends Backbone.View
 
-  className: 'card'
-
-  template: _.template '<span><%= rankName %> of <%= suitName %></span>'
+  template: _.template '<span class="rank"><%= rankName %></span><span class="suit">&<%= suitName %>;</span>'
 
   initialize: ->
+    console.log @
+    @$el.attr "class", "card rank-" + @model.attributes.rankName + " " + @model.attributes.suitName
     @model.on 'change', => @render
     @render()
 

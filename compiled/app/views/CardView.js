@@ -10,11 +10,11 @@
       return CardView.__super__.constructor.apply(this, arguments);
     }
 
-    CardView.prototype.className = 'card';
-
-    CardView.prototype.template = _.template('<span><%= rankName %> of <%= suitName %></span>');
+    CardView.prototype.template = _.template('<span class="rank"><%= rankName %></span><span class="suit">&<%= suitName %>;</span>');
 
     CardView.prototype.initialize = function() {
+      console.log(this);
+      this.$el.attr("class", "card rank-" + this.model.attributes.rankName + " " + this.model.attributes.suitName);
       this.model.on('change', (function(_this) {
         return function() {
           return _this.render;
