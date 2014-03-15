@@ -5,17 +5,28 @@ class window.AppView extends Backbone.View
     <div class="player-hand-container"></div>
     <div class="dealer-hand-container"></div>
   '
-
   events:
     "click .hit-button": -> @model.get('playerHand').hit()
     "click .stand-button": -> @model.get('playerHand').stand()
 
   initialize: ->
-    @model.on 'change:winner', (=>
-      alert @model.get('winner') + " won!"
+    # set up event handler for new game
+    @model.on 'newgame', (=>
+      console.log 'newgame listener triggered'
+
+      @model.on 'results', (=>
+        console.log 'the winner changed'
+        alert @model.get('winner') + " won!"
+
+      )
+
+      # @render()
+
+      @model.get('playerHand').checkBj()
     )
+
+    #render on initialization
     @render()
-    @model.get('playerHand').checkBj()
 
   render: ->
     @$el.children().detach()

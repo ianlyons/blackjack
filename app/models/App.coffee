@@ -2,24 +2,8 @@
 class window.App extends Backbone.Model
 
   initialize: ->
-    @set 'deck', deck = new Deck()
-    @set 'playerHand', deck.dealPlayer()
-    @set 'dealerHand', deck.dealDealer()
-    @set 'winner', ''
-
-    if @get('playerHand').scores()[1] == 21
-      @endgame()
-
-    @listenTo @get('playerHand'), 'stand', (=>
-      @get('dealerHand').autoplay()
-    )
-
-    @listenTo @get('dealerHand'), 'gameover', (=>
-      console.log 'gameover caught by handler'
-      @endgame())
-
-    @listenTo @get('playerHand'), 'gameover', (=>
-      @endgame())
+    #call new game
+    @newgame()
 
   endgame: ->
     console.log('into endgame')
@@ -45,4 +29,27 @@ class window.App extends Backbone.Model
       'push'
     else
       'dealer')
+    @trigger 'results', @
     console.log 'the winner is: ' + @get 'winner'
+    @newgame()
+
+  newgame: ->
+    # new collections
+    @set 'deck', deck = new Deck()
+    @set 'playerHand', deck.dealPlayer()
+    @set 'dealerHand', deck.dealDealer()
+    @set 'winner', ''
+
+    # new listeners
+    @listenTo @get('playerHand'), 'stand', (=>
+      @get('dealerHand').autoplay()
+    )
+    @listenTo @get('dealerHand'), 'gameover', (=>
+      console.log 'gameover caught by handler'
+      @endgame())
+    @listenTo @get('playerHand'), 'gameover', (=>
+      @endgame())
+
+    #trigger newgame to appView
+    console.log 'newgame called'
+    @trigger 'newgame',@
